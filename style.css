@@ -1,0 +1,23 @@
+body
+{
+    background-image: linear-gradient(#2070e2, #24c918, #823aeb, #36b5de );
+}
+.heading
+{
+font-size: 23px;
+width: 100%;
+margin: 0px;
+}
+
+#status
+{
+font-size: 18px;
+}
+canvas{
+    box-shadow: 10px 10px 10px gray;
+    border-radius: 10px;
+}
+button{
+    float: right;
+    color: white !important;
+}
