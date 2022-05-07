@@ -2,7 +2,7 @@
 img = "";
 status = "";
 function preload(){
-img = loadImage('desk.jpg');
+img = loadImage('bedroom.jpg');
 
 }
 function setup(){
@@ -14,12 +14,12 @@ function setup(){
 function draw(){
     image(img, 0, 0, 640, 420);
     fill("#e71a1d");
-    text("Laptop", 45, 75);
+    text("window", 45, 75);
     noFill();
     stroke("#e71a1d");
     rect(30, 60, 450, 350);
     fill("#224df1");
-    text("mouse", 320, 120);
+    text("bed", 320, 120);
     noFill();
     stroke("#224df1");
     rect(300, 90, 270, 320);
