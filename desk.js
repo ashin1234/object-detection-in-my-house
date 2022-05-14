@@ -1,37 +1,41 @@
 
 img = "";
-status = "";
-function preload(){
-img = loadImage('desk.jpg');
+status_desk = "";
+object = [];
+function preload() {
+    img = loadImage('desk.jpg');
 
 }
-function setup(){
+function setup() {
     canvas = createCanvas(640, 420);
     canvas.center();
     objectDetector = ml5.objectDetector('cocossd', modelLoaded);
     document.getElementById("status").innerHTML = "Status: Detecting Objects";
 }
-function draw(){
+function draw() {
     image(img, 0, 0, 640, 420);
-    fill("#e71a1d");
-    text("Laptop", 45, 75);
-    noFill();
-    stroke("#e71a1d");
-    rect(30, 60, 450, 350);
-    fill("#224df1");
-    text("mouse", 320, 120);
-    noFill();
-    stroke("#224df1");
-    rect(300, 90, 270, 320);
+    if (status_desk != "") {
+        for (i = 0; i < object.length; i++) {
+            document.getElementById("status").innerHTML = "Status : Object Detected";
+            fill("#dc1a1f");
+            percent = floor(object[i].confidence * 100);
+            text(object[i].label + " " + percent + "%", object[i].x + 15, object[i].y + 15);
+            noFill();
+            stroke("#dc1a1f");
+            rect(object[i].x, object[i].y, object[i].width, object[i].height);
+        }
+    }
+
 }
-function modelLoaded(){
+function modelLoaded() {
     console.log("Model Loaded!");
-    status = true;
+    status_desk = true;
     objectDetector.detect(img, gotResult);
 }
-function gotResult(error, results){
-    if(error){
+function gotResult(error, results) {
+    if (error) {
         console.log(errore);
     }
     console.log(results);
+    object = results;
 }

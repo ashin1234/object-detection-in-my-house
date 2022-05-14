@@ -1,6 +1,7 @@
 
 img = "";
 status = "";
+object = [];
 function preload(){
 img = loadImage('kitchen.jpg');
 
@@ -11,18 +12,20 @@ function setup(){
     objectDetector = ml5.objectDetector('cocossd', modelLoaded);
     document.getElementById("status").innerHTML = "Status: Detecting Objects";
 }
-function draw(){
+function draw() {
     image(img, 0, 0, 640, 420);
-    fill("#e71a1d");
-    text("window", 45, 75);
-    noFill();
-    stroke("#e71a1d");
-    rect(30, 60, 450, 350);
-    fill("#224df1");
-    text("table", 320, 120);
-    noFill();
-    stroke("#224df1");
-    rect(300, 90, 270, 320);
+    if (status != "") {
+        for (i = 0; i < object.length; i++) {
+            document.getElementById("status").innerHTML = "Status : Object Detected";
+            fill("#FA3232");
+            percent = floor(object[i].confidence * 100);
+            text(object[i].label + " " + percent + "%", object[i].x + 15, object[i].y + 15);
+            noFill();
+            stroke("#d61d1d");
+            rect(object[i].x, object[i].y, object[i].width, object[i].height);
+        }
+    }
+
 }
 function modelLoaded(){
     console.log("Model Loaded!");
@@ -34,4 +37,5 @@ function gotResult(error, results){
         console.log(errore);
     }
     console.log(results);
+    object = results;
 }
